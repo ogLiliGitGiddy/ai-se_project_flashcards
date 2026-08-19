@@ -1,8 +1,8 @@
-# README
+# FLASHCARD APP
 
-## DESCRIPTION
-
-This is just a test of README.MD file.
+My first project in TripleTen's AI-Assisted Software
+Engineering program. It includes decks of flashcards,
+each of which can be viewed in a carousel.
 
 ## FEATURES
 
@@ -10,7 +10,7 @@ This is just a test of README.MD file.
 - CSS
 - SOMETHING ELSE
 
-## DEPLOYMENT
+## TECHNOLOGIES USED
 
 1. OPEN AT YOUR OWN RISK, CODES ARE NOT CORRECT.
 2. YOU MIGHT LOSS YOUR MIND, TRYING TO UNDERSTAND THIS.

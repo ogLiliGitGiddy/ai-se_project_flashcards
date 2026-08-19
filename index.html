@@ -1,0 +1,145 @@
+<!doctype html>
+<!-- T2.1: HTML boilerplate, type ! + Tab -->
+<html lang="en">
+  <!-- this HTML use english as hte main language -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- T2.2: appropriate <title> -->
+    <title>Flash Cards</title>
+    <!-- T2.3 meta tags for author, description, keywaards -->
+    <meta id="author-name" name="author" content="Dr. Amy Ling" />
+    <meta
+      name="description"
+      content="Amy's Sprint 1, project 1: Flash Cards Project - decks."
+    />
+    <meta
+      name="keywords"
+      content="study aids, flashcards, learning materials"
+    />
+    <!-- T2.4: link for favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <!-- T2.5: link in style.css & normalize.css -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/vendor/normalize.css" />
+    <!-- T4.0: google font type -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- P1P2-T2.3 
+     type=module allows for import & export statments &
+      auotmatically enables. defer will execute in the exact order they appear in
+      the source code, regardless of which one finishes downloading first. only
+      runs after the document has been fully parsed but before the
+      DOMContentLoaded event fires. -->
+    <script type="module" src="./assets/js/index.js"></script>
+  </head>
+
+  <!-- T3.B1: give Body the page class -->
+  <!-- BLOCK OF BEM -->
+  <body class="page">
+    <!-- T3.B2: give <header>, <main> & <footer> tags -->
+    <!-- T3.B3.1: header class-->
+    <!-- BLOCK OF BEM -->
+    <header class="header">
+      <!-- ELEMENT OF BEM -->
+      <h1 class="header__title">
+        <!-- ELEMENT OF BEM-->
+        <a class="header__link" href="#home">Flash Cards</a>
+      </h1>
+      <nav class="nav">
+        <!-- BLOCK OF BEM -->
+        <ul class="nav__links">
+          <!-- ELEMENT OF BEM -->
+          <li><a class="nav__link" href="#home">My Decks</a></li>
+          <li><a class="nav__link" href="#about">About</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- T3.B3.2: Page__main-content class, <main> tag an element of the page block -->
+    <main class="page__main-content">
+      <section id="home" class="decks">
+        <!-- T7.1 -->
+        <h2 class="decks__title">My Decks</h2>
+        <!-- T7.2 -->
+        <div class="wrapping-row">
+          <!-- so the decks can rearrange based on browser width, gap in here -->
+          <ul class="decks__list wrapping-row__display-contents">
+            <!-- T7.3 make it a full button class, or else internal validation is confused with <button> in <a> -->
+            <!-- P1P2- T3a.1  replacing the deck <li>s with a single template element. 
+              JS will copy those for repated cards. -->
+            <template id="deck-template">
+              <!-- template element that contains the HTML structure for a single deck item. We can use this template to create new deck items dynamically with JavaScript, by cloning the content of the template and filling in the appropriate data for each deck. -->
+              <li class="deck-item">
+                <article class="deck">
+                  <h3 class="deck__title">Basic HTML Tags</h3>
+                  <!-- container for count & delete icon, outside of <a> wraps, validator is ok with button -->
+                  <div class="deck__row">
+                    <p class="deck__count"></p>
+                    <button class="deck__delete-btn" type="button"></button>
+                    <!-- T7.5 -->
+                  </div>
+                </article>
+                <!-- P1P2-T5.1 -->
+                <a class="deck__link" href="#"></a>
+              </li>
+            </template>
+
+            <li class="deck-item">
+              <!-- T7.4 title as a link, only a wraps. -->
+              <a class="deck deck_color_new decks__new-decks-btn" href="#">
+                <h3 class="deck__title">+ New Deck</h3>
+                <div class="deck__row">
+                  <p class="deck__count"></p>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="carousel">
+        <!-- T11.1 -->
+        <h2 class="carousel__title">HTML Tags Deck - 1/10</h2>
+        <!-- for button layouts -->
+        <div class="carousel__inner">
+          <button
+            class="carousel__btn carousel__btn_type_left carousel__btn_disabled"
+            type="button"
+            aria-label="LEFT"
+          ></button>
+          <!-- T11.2 --><!-- so the decks can rearrange based on browser width, gap in here -->
+          <div class="carousel__card deck_color_green">
+            <!-- T11.3 -->
+            <p class="carousel__card-text">&lt;body&gt;&lt;/body&gt;</p>
+          </div>
+          <!-- T11.4 --><!-- T7.5 -->
+          <button
+            class="carousel__btn carousel__btn_type_right carousel__btn_disabled"
+            type="button"
+            aria-label="RIGHT"
+          ></button>
+          <!-- T7.5 -->
+          <button
+            class="carousel__btn carousel__btn_type_flip"
+            type="button"
+            aria-label="FLIP"
+          ></button>
+        </div>
+      </section>
+
+      <!-- P1P2-T4.1 “404 Not Found” section -->
+      <section id="not-found" class="not-found">
+        <h2 class="not-found__status-code">404</h2>
+        <p class="not-found__text">Sorry, nothing found!</p>
+      </section>
+    </main>
+    <!-- T3.B3.3: footer class -->
+    <footer class="footer">
+      <p class="footer__text">&copy; 2026 By Amy Ling</p>
+    </footer>
+  </body>
+</html>

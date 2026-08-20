@@ -8,6 +8,7 @@ each of which can be viewed in a carousel.
 
 - HTML
 - CSS
+- JAVASCRIPT
 - SOMETHING ELSE
 
 ## TECHNOLOGIES USED

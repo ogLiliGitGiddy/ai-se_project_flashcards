@@ -1,0 +1,49 @@
+/* T3 <body>, FLEX CONTAINER: for all visibible page */
+.page {
+  /* block of BEM */
+  display: flex; /* T9.1 */
+  flex-grow: 1;
+  align-items: center; /* Align all Text to center horizontally */
+  flex-direction: column; /* T9.1 */
+  flex-wrap: nowrap; /* all flex-items try to fit in one line */
+  margin: 0 auto;
+  padding: 20px 40px 0 40px; /* T4.I2.2.2 & T6.1: NO MARGIN IN BEM, set it in elements instead. */
+  min-height: 100vh; /*T.9.1 */
+  max-width: 1440px; /* T6.2: app's max width, preferred over width. */
+  box-sizing: border-box; /* T9.3: property that tells the browser to include an element's padding and border within its specified width and height */
+  background-color: #ececec; /* T3.1: add .page selector & background-color */
+  font-family:
+    Inter, Arial, Helvetica, sans-serif, sans-serif; /* T4.I1.0 & T5 */
+  color: #1a1a1a; /* T4.I1.0 */
+  line-height: 1; /* T4.I1.0: sets height of a line box- vertical text spacing between lines */
+  text-decoration: none; /* decorative lines=NO */
+  list-style-type: none; /* for <li> with parents of <ul> or <ol>. This is no bullet points. */
+}
+
+/* ELEMENTS: for MY DECK title + space above + flashcards */
+.page__main-content {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto; /* center the content int he page */
+  padding: 0 40px 60px; /* left & right padding + some bottom */
+  box-sizing: border-box;
+}
+
+.page__main-content_carousel {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: baseline;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* P1P2-T4.1 “404 Not Found” section */
+.not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+}

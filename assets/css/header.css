@@ -1,0 +1,44 @@
+/* FLEX CONTAINER: top nav menu combination */
+/* FLEX CONTAINER: top nav menu combination */
+.header {
+  /* A block of BEM, but NO margin */
+  display: flex; /* T6.4: activates flex-box/container */
+  align-items: center;
+  justify-content: space-between; /* distributes items evenly along the main axis of a Flexbox or Grid container. */
+  box-sizing: border-box; /* T9.3: property that tells the browser to include an element's padding and border within its specified width and height */
+  margin: 0;
+  padding: 0;
+  width: 100%; /* to ensure width is 100% of parent, so justify-conents works properly. */
+  text-decoration: none;
+  text-align: start;
+}
+
+/* descendant select, targets al <a> elements inside the header element */
+.header a {
+  align-items: baseline;
+  font-family:
+    Inter, Arial, Helvetica, sans-serif, sans-serif; /* T4.I1.0 & T5 */
+  color: #1a1a1a; /* T4.I1.0 */
+  line-height: 1; /* T4.I1.0: sets height of a line box- vertical text spacing between lines */
+  text-decoration: none; /* decorative lines=NO */
+  list-style-type: none; /* for <li> with parents of <ul> or <ol>. This is no bullet points. */
+}
+
+/* T4.I1.1: Elements of BEM, set margin here.*/
+.header__title {
+  box-sizing: border-box; /* T9.3: property that tells the browser to include an element's padding and border within its specified width and height */
+  align-items: baseline;
+  text-align: start;
+}
+
+.header__link {
+  font-weight: 900; /* T4.I1.1: thickness or boldness of text characters */
+  font-size: 24px; /* T4.I1.1 */
+  letter-spacing: -0.24px; /* T4.I1.1 */
+  text-align: start;
+}
+
+/* T10 HOVER STATES */
+.header__link:hover {
+  text-decoration: underline;
+}

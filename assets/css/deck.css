@@ -1,0 +1,146 @@
+/* a single deck */
+.deck {
+  display: flex;
+  flex-direction: column;
+  position: relative; /* P1P2-T5.1 */
+  box-sizing: border-box; /* P1P2-review 1  flex-direction: column; */
+  align-items: flex-start;
+  margin: 0;
+  padding: 20px 20px 0 20px;
+  width: 325px;
+  height: 205px;
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #1a1a1a;
+}
+
+/* T8: modifier colors */
+.deck_color_green {
+  background-color: #64d583;
+  border-radius: 20px;
+}
+.deck_color_blue {
+  background-color: #91a8f9;
+  border-radius: 20px;
+}
+.deck_color_pink {
+  background-color: #ee92d7;
+  border-radius: 20px;
+}
+.deck_color_purple {
+  background-color: #aa8ef0;
+  border-radius: 20px;
+}
+.deck_color_orange {
+  background-color: #ee955e;
+  border-radius: 20px;
+}
+.deck_color_yellow {
+  background-color: #f5d770;
+  border-radius: 20px;
+}
+.deck_color_new {
+  background-color: #d9d9d9;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.2;
+  color: #1a1a1a80;
+  border-radius: 20px;
+}
+
+/* T10 */
+.deck_color_new:hover {
+  display: flex;
+  background-color: #c5c5c5;
+  color: #1a1a1a;
+}
+
+/* P1P2-T5.1 */
+.deck__link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* T4.4 individual deck title */
+.deck__title {
+  text-align: start;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.deck__title:hover {
+  text-decoration: underline;
+}
+
+/* per deck-per title */
+.deck_new_title {
+  opacity: 50%;
+}
+
+/* container for count & delete button */
+.deck__row {
+  display: flex;
+  justify-content: space-between; /* set to have space between the 2 items in this container */
+  align-items: flex-end; /* set to the bottom */
+  width: 100%;
+  height: 100%;
+  padding-bottom: 20px;
+}
+
+/* T4.5 Card counts per deck */
+.deck__count {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.deck__delete-btn {
+  display: flex;
+  justify-content: flex-end; /* set to the left */
+  background-image: url("../images/delete.svg");
+  background-repeat: no-repeat; /* don't tile */
+  background-position: right; /* put image in the center of the button */
+  background-size: contain; /*scale image to the side below */
+  background-color: inherit; /* takes the paraent colo of different deck colors */
+  width: 24px;
+  height: 24px;
+  border: none;
+  cursor: pointer; /* when hover it shows the hand */
+  opacity: 50%;
+  z-index: 2; /* P1P2-T5.1 */
+}
+
+.deck__delete-btn:hover {
+  opacity: 100%;
+}
+
+.deck__new-decks-btn {
+  display: flex;
+  background-color: #d9d9d9;
+  justify-content: space-between;
+  flex-direction: column;
+  border: none;
+  cursor: pointer; /* when hover it shows the hand */
+  opacity: 50%;
+}
+
+.deck-item {
+  position: relative;
+  width: 100%;
+}
+
+button {
+  font: inherit;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+button:disabled {
+  pointer-events: none;
+}

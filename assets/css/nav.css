@@ -1,0 +1,28 @@
+/* T4.2 upper left navigation menu */
+.nav {
+  display: inline-block;
+  align-items: baseline;
+}
+
+/* FLEX CONTAINER: for nav links */
+.nav__links {
+  display: flex;
+  text-align: center;
+  font-weight: 500; /* T4.I1.3 */
+  font-size: 16px; /* T4.I1.3 */
+  list-style-type: none; /* for <li> with parents of <ul> or <ol>. This is no bullet points. */
+  box-sizing: border-box;
+  gap: 20px; /* shorthand that defines the spacing (gutters) between items in Flexbox, Grid, and multi-column layouts */
+}
+
+/* ELEMENTS: of nav links */
+.nav__link {
+  display: inline-block;
+  margin: 0; /* T6:5 margin for non flex item */
+  padding: 0;
+}
+
+/* T10 HOVER STATES */
+.nav__link:hover {
+  text-decoration: underline;
+}

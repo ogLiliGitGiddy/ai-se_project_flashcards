@@ -1,0 +1,6 @@
+/* T4.0 overall */
+* {
+  /* Applies to all, no max-width here, as it will limite .deck */
+  margin: 0; /* set top, right, bottom, left to 0 */
+  padding: 0;
+}

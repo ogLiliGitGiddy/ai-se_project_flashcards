@@ -1,0 +1,18 @@
+/* FLEX CONTAINER */
+.footer {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* ELEMENT */
+.footer__text {
+  align-items: flex-start;
+  margin: 32px 0 32px 0; /* T9 */
+  font-weight: 400; /* T4.I1.7 */
+  font-size: 16px; /* T4.I1.7 */
+  letter-spacing: -0.16px; /* T4.I1.7 */
+  color: #00000080; /* T4.I1.7 */
+}

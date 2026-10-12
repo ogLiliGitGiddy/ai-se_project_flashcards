@@ -1,0 +1,8 @@
+/* P1P2-T4.1 “404 Not Found” section */
+.not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+}

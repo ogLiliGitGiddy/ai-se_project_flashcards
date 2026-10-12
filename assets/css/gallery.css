@@ -1,0 +1,45 @@
+/* This is row of cards: flex with page width and go from multi-column to single-column, gap must assign here */
+.gallery {
+  width: 100%;
+  max-width: 100%;
+  margin: 60px 0 40px; /* bit top, some bottom */
+}
+
+.wrapping-row {
+  display: contents;
+}
+
+.gallery__title {
+  margin: 60px 0 40px 0;
+  font-weight: 700; /* T4.I2.4 */
+  font-size: 40px; /* T4.I2.4 */
+}
+
+.wrapping-row__display-contents {
+  display: grid;
+  grid-template-columns: repeat(
+    4,
+    1fr
+  ); /* 4 columns with equal width, 1fr means 1 fraction of the available space */
+  gap: 20px; /* horizontal & vertical gap between each deck */
+  justify-content: center;
+}
+
+/* all gallery */
+.gallery__list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  position: relative;
+  width: 100%;
+}
+
+.gallery__new-card-btn {
+  display: flex;
+  background-color: #d9d9d9;
+  justify-content: space-between;
+  flex-direction: column;
+  border: none;
+  cursor: pointer; /* when hover it shows the hand */
+  opacity: 50%;
+}

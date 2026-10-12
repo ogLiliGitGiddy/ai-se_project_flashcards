@@ -1,13 +1,13 @@
-/* P1P2-T2.2 */ // This file contains the data for the decks and cards, as well as any helper functions related to decks that we may need in multiple modules. We will import the decks array and the getDeckByID function into other modules that need to access the deck data, such as index.js and carousel.js.
-const decks = [
+/* P1P2-T2.2 */ // This file contains the data for the gallery and gallery, as well as any helper functions related to gallery that we may need in multiple modules. We will import the gallery array and the getCardByID function into other modules that need to access the card data, such as index.js and carousel.js.
+const gallery = [
   {
-    id: "html-basics", // Each deck object has a unique id property that can be used to identify it. This will be important for routing, because we will use the deck id in the URL hash to determine which deck to display in the carousel view. So we need to make sure each deck has a unique id string that we can use for this purpose.
-    name: "HTML Basics", // Each deck object has a name property that is a string representing the name of the deck. This will be used in the UI to display the name of the deck, such as in the deck list and in the carousel title.
-    description: "Core HTML tags and concepts", // Each deck object has a description property that is a string providing a brief description of the deck's content. This can be used in the UI to give users more information about what the deck covers, such as in the deck list or in the carousel view.
-    cards: [
-      // Each deck object has a cards property that is an array of card objects. Each card object represents a single flashcard with a question and answer.
+    id: "html-basics", // Each card object has a unique id property that can be used to identify it. This will be important for routing, because we will use the card id in the URL hash to determine which card to display in the carousel view. So we need to make sure each card has a unique id string that we can use for this purpose.
+    name: "HTML Basics", // Each card object has a name property that is a string representing the name of the card. This will be used in the UI to display the name of the card, such as in the card list and in the carousel title.
+    description: "Core HTML tags and concepts", // Each card object has a description property that is a string providing a brief description of the card's content. This can be used in the UI to give users more information about what the card covers, such as in the card list or in the carousel view.
+    gallery: [
+      // Each card object has a gallery property that is an array of card objects. Each card object represents a single flashcard with a question and answer.
       {
-        id: 1, //  Each card object has a unique id property that can be used to identify it. This can be useful for tracking which cards have been studied, or for any future features we might want to add that involve individual cards. For now, we just need to make sure each card has a unique id number within its deck.
+        id: 1, //  Each card object has a unique id property that can be used to identify it. This can be useful for tracking which gallery have been studied, or for any future features we might want to add that involve individual gallery. For now, we just need to make sure each card has a unique id number within its card.
         question: "What does HTML stand for?", // Each card object has a question property that is a string representing the question on the flashcard. This will be displayed on the front side of the card in the carousel view.
         answer: "HyperText Markup Language", // Each card object has an answer property that is a string representing the answer to the question on the flashcard. This will be displayed on the back side of the card in the carousel view when the user flips the card.
       },
@@ -57,13 +57,13 @@ const decks = [
         answer: "<html>",
       },
     ],
-    color: "#64d583", // Each deck object has a color property that is a string representing the color associated with the deck. This will be used in the UI to style the deck and its cards, such as in the deck list and in the carousel view. We can use the stringToHex function from colors.js to convert this color name to a hex value when we need to apply it as a CSS class.
+    color: "#64d583", // Each card object has a color property that is a string representing the color associated with the card. This will be used in the UI to style the card and its gallery, such as in the card list and in the carousel view. We can use the stringToHex function from colors.js to convert this color name to a hex value when we need to apply it as a CSS class.
   },
   {
     id: "html-semantic",
     name: "Semantic HTML",
     description: "Meaningful HTML elements for structure and accessibility",
-    cards: [
+    gallery: [
       {
         id: 11,
         question: "What semantic tag represents the top section of a page?",
@@ -130,7 +130,7 @@ const decks = [
     id: "css-fundamentals",
     name: "CSS Fundamentals",
     description: "Selectors, properties, and the cascade",
-    cards: [
+    gallery: [
       {
         id: 21,
         question: "What does CSS stand for?",
@@ -190,7 +190,7 @@ const decks = [
     id: "css-box-model",
     name: "CSS Box Model",
     description: "Content, padding, border, and margin",
-    cards: [
+    gallery: [
       {
         id: 31,
         question:
@@ -255,7 +255,7 @@ const decks = [
     id: "css-flexbox",
     name: "CSS Flexbox",
     description: "Flexible layout with Flexbox",
-    cards: [
+    gallery: [
       {
         id: 41,
         question: "What declaration enables Flexbox on a container?",
@@ -318,7 +318,7 @@ const decks = [
     id: "js-basics",
     name: "JavaScript Basics",
     description: "Variables, types, and operators",
-    cards: [
+    gallery: [
       {
         id: 51,
         question:
@@ -379,7 +379,7 @@ const decks = [
     id: "js-functions",
     name: "JavaScript Functions",
     description: "Declaring, calling, and passing functions",
-    cards: [
+    gallery: [
       {
         id: 61,
         question: "What keyword declares a traditional named function?",
@@ -444,7 +444,7 @@ const decks = [
     id: "js-arrays",
     name: "JavaScript Arrays",
     description: "Working with lists of data",
-    cards: [
+    gallery: [
       {
         id: 71,
         question: "How do you access the first element of an array called arr?",
@@ -509,7 +509,7 @@ const decks = [
     id: "js-dom",
     name: "JavaScript DOM",
     description: "Selecting and manipulating elements on the page",
-    cards: [
+    gallery: [
       {
         id: 81,
         question: "What does DOM stand for?",
@@ -571,7 +571,7 @@ const decks = [
     id: "web-tech-terms",
     name: "Web Tech Terms",
     description: "Foundational vocabulary for how the web works",
-    cards: [
+    gallery: [
       {
         id: 91,
         question: "What does URL stand for?",
@@ -635,7 +635,7 @@ const decks = [
     id: "dev-tools",
     name: "Developer Tools",
     description: "Using the browser DevTools to inspect and debug",
-    cards: [
+    gallery: [
       {
         id: 101,
         question: "How do you open browser Developer Tools in most browsers?",
@@ -701,7 +701,7 @@ const decks = [
     id: "git-basics",
     name: "Git Basics",
     description: "Version control with Git",
-    cards: [
+    gallery: [
       {
         id: 111,
         question: "What command initializes a new Git repository in a folder?",
@@ -757,24 +757,25 @@ const decks = [
           "When two branches have made different changes to the same part of a file and Git cannot auto-merge them",
       },
     ],
-    color: "#f5d770", // Using the same color as the "JavaScript Basics" deck for visual consistency, since Git is often used in JavaScript projects
+    color: "#f5d770", // Using the same color as the "JavaScript Basics" card for visual consistency, since Git is often used in JavaScript projects
   },
 ];
 
 /**
- * Retrieves a deck object by its ID from the decks array.
+ * Retrieves a card object by its ID from the gallery array.
  *
- * @param {string} deckId - The unique identifier of the deck to retrieve
- * @returns {object|undefined} The deck object if found, undefined otherwise
+ * @param {string} cardId - The unique identifier of the card to retrieve
+ * @returns {object|undefined} The card object if found, undefined otherwise
  */
-function getDeckByID(deckId) {
-  return decks.find((deck) => deck.id === deckId);
+
+function getCardByID(cardId) {
+  return gallery.find((card) => card.id === cardId);
 }
 
-// P1P2-T6.7 // Helper function to generate the carousel title string for a given deck
-function getCarouselTitleString(deck) {
-  const totalCards = deck.cards.length; // Get the number of cards in the deck
-  return `${deck.name} (${totalCards} ${totalCards === 1 ? "card" : "cards"})`; // Return a string in the format "Deck Name (X cards)", handling singular/plural
+// P1P2-T6.7 // Helper function to generate the carousel title string for a given card
+function getCarouselTitleString(card) {
+  const totalGallery = card.gallery.length; // Get the number of gallery in the card
+  return `${card.name} (${totalGallery} ${totalGallery === 1 ? "card" : "gallery"})`; // Return a string in the format "Card Name (X gallery)", handling singular/plural
 }
 
-export { decks, getDeckByID, getCarouselTitleString };
+export { gallery, getCardByID, getCarouselTitleString };

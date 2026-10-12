@@ -1,26 +1,26 @@
 // P1P2-T2.1
 // P1P2-T4.2
 
-import { decks, getCarouselTitleString } from "./decks.js"; // to get the appropriate title string to display in the carousel title element- shows the current deck name and card count.
-import { hexToString, removeColorClasses } from "./colors.js"; // hexToString function to get the color name from the deck color hex string, can apply the appropriate color class to the card
+import { gallery, getCarouselTitleString } from "./gallery.js"; // to get the appropriate title string to display in the carousel title element- shows the current card name and card count.
+import { hexToString, removeColorClasses } from "./colors.js"; // hexToString function to get the color name from the card color hex string, can apply the appropriate color class to the card
 
 // local
 let currentIndex = 0; // P1P2-T6.3 need to reside outside of function.
 let showingQuestion = true; // P1P2-T7.1 track whether currently showing question or answer. Initially true because we want to show question first when we render the carousel.
-let currentDeck = null; // track the deck currently displayed in the carousel for persistent handlers
+let currentCard = null; // track the card currently displayed in the carousel for persistent handlers
 
-function renderCarouselView(deck) {
-  // set the current deck and reset index when rendering a new deck
-  currentDeck = deck;
+function renderCarouselView(card) {
+  // set the current card and reset index when rendering a new card
+  currentCard = card;
   currentIndex = 0;
   // P1P2-T6
   // P1P2-T6.1
-  const currentCard = deck.cards[currentIndex]; // P1P2-T6.3 // we will need to know which card we are currently showing in order to update the text and color when we flip the card and when we navigate to the next or previous card. So we can define currentCard variable that gets the current card based on the currentIndex.
+  const cardSelection = card.gallery[currentIndex]; // P1P2-T6.3 // we will need to know which card we are currently showing in order to update the text and color when we flip the card and when we navigate to the next or previous card. So we can define currentCard variable that gets the current card based on the currentIndex.
   const carouselEl = document.querySelector(".carousel"); // we need to select the carousel element inside the renderCarouselView function, because we will need to update the text and color of the card element inside the carousel whenever we flip the card or navigate to next/previous card. So we need to make sure we are always selecting the current carousel element in the DOM, which is the one that is currently being rendered.
-  const carouselTitle = carouselEl.querySelector(".carousel__title"); // P1P2-T6.7 // we need to select the carousel title element so that we can update its text content to show the current deck name and card count. We can use the getCarouselTitleString function to get the appropriate title string based on the current deck.
-  // carouselTitle.textContent = getCarouselTitleString(deck); // set the text content of the carousel title element to the string returned by getCarouselTitleString function, which will show the current deck name and card count.
+  const carouselTitle = carouselEl.querySelector(".carousel__title"); // P1P2-T6.7 // we need to select the carousel title element so that we can update its text content to show the current card name and card count. We can use the getCarouselTitleString function to get the appropriate title string based on the current card.
+  // carouselTitle.textContent = getCarouselTitleString(card); // set the text content of the carousel title element to the string returned by getCarouselTitleString function, which will show the current card name and card count.
   // remove above use updateDisplay()
-  const leftBtn = carouselEl.querySelector(".carousel__btn_type_left"); // we also need to select the left and right arrow buttons so that we can add event listeners to them to navigate between cards and also disable them when we are on the first or last card.
+  const leftBtn = carouselEl.querySelector(".carousel__btn_type_left"); // we also need to select the left and right arrow buttons so that we can add event listeners to them to navigate between gallery and also disable them when we are on the first or last card.
   const rightBtn = carouselEl.querySelector(".carousel__btn_type_right"); // same reason as leftBtn, we need to select the right button to add event listener and disable/enable it when needed.
   const cardTextEl = carouselEl.querySelector(".carousel__card-text"); // we need to select the card text element so that we can update its text content to show the current question or answer based on whether showingQuestion is true or false.
 
@@ -49,7 +49,7 @@ function renderCarouselView(deck) {
     }
 
     // if currentIndex is at the last card, disable right button. Otherwise, enable it.
-    if (currentIndex === currentDeck.cards.length - 1) {
+    if (currentIndex === currentCard.gallery.length - 1) {
       disableButton(rightBtn);
     } else {
       enableButton(rightBtn);
@@ -60,20 +60,20 @@ function renderCarouselView(deck) {
   function updateDisplay() {
     const cardEl = carouselEl.querySelector(".carousel__card"); // need to select the card element inside the updateDisplay function, because we will need to update the text and color of the same card element when we flip the card and when we navigate to the next or previous card. So we need to make sure we are always selecting the current card element in the DOM, which is the one inside the carouselEl.
 
-    carouselTitle.textContent = `${currentDeck.name} - ${currentIndex + 1} / ${currentDeck.cards.length}`; // P1P2-T6.7 update the text content of the carousel title element to show the current deck name and card count.
+    carouselTitle.textContent = `${currentCard.name} - ${currentIndex + 1} / ${currentCard.gallery.length}`; // P1P2-T6.7 update the text content of the carousel title element to show the current card name and card count.
 
     // text
     if (showingQuestion) {
-      cardTextEl.textContent = currentDeck.cards[currentIndex].question;
+      cardTextEl.textContent = currentCard.gallery[currentIndex].question;
     } // if showingQuestion is true, set the text content to the question. Otherwise, set it to the answer.
     else {
-      cardTextEl.textContent = currentDeck.cards[currentIndex].answer;
+      cardTextEl.textContent = currentCard.gallery[currentIndex].answer;
     }
 
-    // color: always use the deck color for the carousel card (keep color when flipped)
+    // color: always use the card color for the carousel card (keep color when flipped)
     removeColorClasses(cardEl);
     if (showingQuestion) {
-      const colorName = hexToString(currentDeck.color); // get the color name from the deck color hex string using the hexToString function, so that we can apply the appropriate color class to the card element.
+      const colorName = hexToString(currentCard.color); // get the color name from the card color hex string using the hexToString function, so that we can apply the appropriate color class to the card element.
       cardEl.classList.add(`carousel__card_color_${colorName}`); // apply the appropriate color class to the card
     } else {
       cardEl.classList.add(`carousel__card_color_white`); // when showing answer, use gray color for the card, so that we can distinguish between question and answer by both text and color.
@@ -83,7 +83,7 @@ function renderCarouselView(deck) {
 
   // flip button listener
   const flipBtn = carouselEl.querySelector(".carousel__btn_type_flip");
-  // Attach persistent handlers only once. Handlers read `currentDeck` and `currentIndex`.
+  // Attach persistent handlers only once. Handlers read `currentCard` and `currentIndex`.
   if (!carouselEl.dataset.listenersAttached) {
     flipBtn.addEventListener("click", () => {
       showingQuestion = !showingQuestion; // P1P2-T6.2 toggle between question and answer
@@ -93,7 +93,7 @@ function renderCarouselView(deck) {
     // right arrow listener
     rightBtn.addEventListener("click", () => {
       // increment currentIndex and call updateDisplay to show the next card when right arrow is clicked, but only if we are not already on the last card. Otherwise, do nothing.
-      if (currentIndex < currentDeck.cards.length - 1) {
+      if (currentIndex < currentCard.gallery.length - 1) {
         currentIndex++;
         showingQuestion = true; // reset to showing question whenever we navigate to a new card, so that it will always show the question side up first when we navigate to a new card.
         updateDisplay();
@@ -113,7 +113,7 @@ function renderCarouselView(deck) {
   }
 
   showingQuestion = true; // P1P2-T7.5 reset to showing question whenever we render the carousel, so that it will always start with question side up.
-  updateDisplay(); // call updateDisplay at the end of the renderCarouselView function to initialize the display of the card text and color based on the current card and showingQuestion value. This way, whenever we render the carousel, it will show the first card's question with the appropriate color, and also set up the arrows correctly based on the number of cards in the deck.
+  updateDisplay(); // call updateDisplay at the end of the renderCarouselView function to initialize the display of the card text and color based on the current card and showingQuestion value. This way, whenever we render the carousel, it will show the first card's question with the appropriate color, and also set up the arrows correctly based on the number of gallery in the card.
 }
 
 // P1P2-T4.2

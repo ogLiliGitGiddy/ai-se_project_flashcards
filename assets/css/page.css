@@ -20,7 +20,7 @@
   list-style-type: none; /* for <li> with parents of <ul> or <ol>. This is no bullet points. */
 }
 
-/* ELEMENTS: for MY DECK title + space above + flashcards */
+/* ELEMENTS: for MY card title + space above + flashcards */
 .page__main-content {
   width: 100%;
   max-width: 1440px;
@@ -37,13 +37,4 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-/* P1P2-T4.1 “404 Not Found” section */
-.not-found {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 100px;
 }

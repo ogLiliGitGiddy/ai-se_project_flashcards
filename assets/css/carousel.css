@@ -46,7 +46,7 @@
   font-size: 32px;
 }
 
-/*P1P2-T5.5: modifier colors for carousel cards, same as deck colors but with different class name to avoid conflict with deck colors. Also, the carousel card is bigger than deck, so the border-radius is still 20px but it looks less round than deck.*/
+/*P1P2-T5.5: modifier colors for carousel cards, same as card colors but with different class name to avoid conflict with card colors. Also, the carousel card is bigger than card, so the border-radius is still 20px but it looks less round than card.*/
 .carousel__card_color_green {
   background-color: #64d583;
   border-radius: 20px;

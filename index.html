@@ -60,32 +60,40 @@
     </header>
     <!-- T3.B3.2: Page__main-content class, <main> tag an element of the page block -->
     <main class="page__main-content">
+      <!-- Existing home section -->
       <section id="home" class="gallery">
-        <!-- T7.1 -->
-        <h2 class="gallery__title">My gallery</h2>
-        <!-- T7.2 -->
+        <h2 class="gallery__title">My Decks</h2>
+        <div class="wrapping-row">
+          <ul class="gallery__list wrapping-row__display-contents"></ul>
+          <button type="button" class="gallery__new-deck-btn">+ New Deck</button>
+        </div>
+      </section>
+      <section id="deck-view" class="gallery">
+        <div class="gallery__header">
+            <h2 class="gallery__title"></h2>
+              <button type="button" class="gallery__new-card-btn"> <!-- create a new card, not a full gallery -->
+              + New Card</button>
+              <button type="button" class="gallery__practice-btn">Practice</button>
+        </div>
         <div class="wrapping-row">
           <!-- so the gallery can rearrange based on browser width, gap in here -->
-          <ul class="gallery__list wrapping-row__display-contents">
-            <!-- T7.3 make it a full button class, or else internal validation is confused with <button> in <a> -->
-            <!-- P1P2- T3a.1  replacing the card <li>s with a single template element. 
-              JS will copy those for repated cards. -->
-            <template id="card-template">
-              <!-- template element that contains the HTML structure for a single card item. We can use this template to create new card items dynamically with JavaScript, by cloning the content of the template and filling in the appropriate data for each card. -->
-              <li class="card__item">
-                <article class="card">
-                  <h3 class="card__title">Basic HTML Tags</h3>
-                  <!-- container for count & delete icon, outside of <a> wraps, validator is ok with button -->
-                  <div class="card__row">
-                    <p class="card__count"></p>
-                    <button class="card__delete-btn" type="button"></button>
-                    <!-- T7.5 -->
-                  </div>
-                </article>
-                <!-- P1P2-T5.1 -->
-                <a class="card__link" href="#"></a>
-              </li>
-            </template>
+          <ul class="gallery__list wrapping-row__display-contents"></ul>
+        </div>
+      </section>
+      <!-- P1P2- T3a.1  replacing the card <li>s with a single template element. 
+        JS will copy those for repated cards. -->
+      <template id="card-template">
+        <!-- template element that contains the HTML structure for a single card item. We can use this template to create new card items dynamically with JavaScript, by cloning the content of the template and filling in the appropriate data for each card. -->
+        <li class="card">
+          <h3 class="card__title">Basic HTML Tags</h3>
+            <!-- container for count & delete icon, outside of <a> wraps, validator is ok with button -->
+          <div class="card__row">
+            <button type="button" aria-label="Flip card" class="card__flip-btn"></button>
+            <button type="button" aria-label="Delete card" class="card__delete-btn"></button>
+              <!-- T7.5 -->
+          </div>
+        </li>
+      </template>
 
             <li class="card__item">
               <!-- T7.4 title as a link, only a wraps. -->

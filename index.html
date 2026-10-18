@@ -65,15 +65,19 @@
         <h2 class="gallery__title">My Decks</h2>
         <div class="wrapping-row">
           <ul class="gallery__list wrapping-row__display-contents"></ul>
-          <button type="button" class="gallery__new-deck-btn">+ New Deck</button>
+          <button type="button" class="gallery__new-deck-btn">
+            + New Deck
+          </button>
         </div>
       </section>
       <section id="deck-view" class="gallery">
         <div class="gallery__header">
-            <h2 class="gallery__title"></h2>
-              <button type="button" class="gallery__new-card-btn"> <!-- create a new card, not a full gallery -->
-              + New Card</button>
-              <button type="button" class="gallery__practice-btn">Practice</button>
+          <h2 class="gallery__title"></h2>
+          <button type="button" class="gallery__new-card-btn">
+            <!-- create a new card, not a full gallery -->
+            + New Card
+          </button>
+          <button type="button" class="gallery__practice-btn">Practice</button>
         </div>
         <div class="wrapping-row">
           <!-- so the gallery can rearrange based on browser width, gap in here -->
@@ -86,28 +90,22 @@
         <!-- template element that contains the HTML structure for a single card item. We can use this template to create new card items dynamically with JavaScript, by cloning the content of the template and filling in the appropriate data for each card. -->
         <li class="card">
           <h3 class="card__title">Basic HTML Tags</h3>
-            <!-- container for count & delete icon, outside of <a> wraps, validator is ok with button -->
+          <!-- container for count & delete icon, outside of <a> wraps, validator is ok with button -->
           <div class="card__row">
-            <button type="button" aria-label="Flip card" class="card__flip-btn"></button>
-            <button type="button" aria-label="Delete card" class="card__delete-btn"></button>
-              <!-- T7.5 -->
+            <button
+              type="button"
+              aria-label="Flip card"
+              class="card__flip-btn"
+            ></button>
+            <button
+              type="button"
+              aria-label="Delete card"
+              class="card__delete-btn"
+            ></button>
+            <!-- T7.5 -->
           </div>
         </li>
       </template>
-
-            <li class="card__item">
-              <!-- T7.4 title as a link, only a wraps. -->
-              <a class="card card_color_new gallery__new-card-btn" href="#">
-                <h3 class="card__title">+ New card</h3>
-                <div class="card__row">
-                  <p class="card__count"></p>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
       <section class="carousel">
         <!-- T11.1 -->
         <h2 class="carousel__title">HTML Tags card - 1/10</h2>

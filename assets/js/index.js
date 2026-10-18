@@ -8,19 +8,25 @@ import { renderCarouselView } from "./carousel.js";
 
 // P1P2-T4.5 Define home, carousel, not-found.
 const homeSection = document.querySelector("#home");
+const deckSection = document.querySelector("#deck-view");
 const carouselSection = document.querySelector(".carousel");
 const notFoundSection = document.querySelector("#not-found");
 const cardTemplateEl = document.querySelector("#card-template"); // P1P2-T3a.3
+const deckTitleEl = deckSection.querySelector(".gallery__title");
+const deckCardListEl = deckSection.querySelector(".gallery__list");
+const deckPracticeButtonEl = deckSection.querySelector(".gallery__practice-btn");
+let activeDeck = null;
 
 // P1P2-T4.5 Define home
 function renderHomeView() {
   homeSection.style.display = "block"; // show home view
+  deckSection.style.display = "none";
   carouselSection.style.display = "none"; // hide carousel view
   notFoundSection.style.display = "none"; // hide not found view
 
   // P1P2-T3a.3
   const cardContainerEl = document.querySelector(".gallery__list"); // we need to select the card container element inside the renderHomeView function, because we will need to update the list of gallery inside the home view whenever we render the home view. So we need to make sure we are always selecting the current card container element in the DOM, which is the one inside the homeSection.
-  cardContainerEl.querySelectorAll("li.card__item").forEach((item) => {
+  cardContainerEl.querySelectorAll("li.card").forEach((item) => {
     // we can select all the existing card items inside the card container and remove
     if (!item.querySelector(".gallery__new-card-btn")) {
       // we want to keep the "Create New Card" button, which is also an li element with class card__item, so we can check if the item has a child element with the class "gallery__new
@@ -32,25 +38,23 @@ function renderHomeView() {
   function createCardEl(item) {
     // P1P2-T5.3
     const cloneEl = cardTemplateEl.content // we can access the content of the template element with the content property, which gives us a DocumentFragment containing the elements defined inside the template. Then we can use querySelector to select the li element with class "" inside the template content, and clone it with cloneNode(true) to create a new instance of the card item element that we can customize and add to the DOM.
-      .querySelector(".card__item") // select the li element with class "card__item" inside the template content
+      .querySelector(".card") // select the li element with class "card__item" inside the template content
       .cloneNode(true); // clone it with cloneNode(true) to create a new instance of the card item element that we can customize and add to the DOM. We use true as the argument to cloneNode to indicate that we want to do a deep clone, which means that it will also clone all the child elements inside the li element, so that we can customize those child elements as well.
 
     // Each card item element should have a link that navigates to the carousel view for that card. So we need to select the link element inside the cloned card item, and set its href attribute to the appropriate URL hash that will navigate to the carousel view for that card when clicked. The URL hash should include the card's ID so that we can identify which card's carousel view to render when the link is clicked.
-    const cardLinkEl = cloneEl.querySelector(".card__link");
-    cardLinkEl.href = `#carousel/${item.id}`; // we can use a template literal to create the href string, which includes the card's ID from the item object. This way, when the link is clicked, it will navigate to a URL hash like "#carousel/1" or "#carousel/2", where the number corresponds to the ID of the card that was clicked. Then in our router function, we can read this ID from the URL hash and use it to determine which card's carousel view to render.
-
-    // P1P2-T3d gallery property storing their array of gallery. Get the length of this array and use it in a template literal to create the card count text.
-    const countEl = cloneEl.querySelector(".card__count");
-    countEl.textContent = `${item.gallery.length} Gallery`; // we can use a template literal to create the text content for the card count element, which includes the length of the gallery array from the item object. This way, it will display something like "3 Gallery" or "10 Gallery" based on how many gallery are in that card.
+    const cardLinkEl = cloneEl;
+    cardLinkEl.href = `#deck/${item.id}`;
 
     // P1P2-T3c.3 Each card object stores its color as a hex string. get the corresponding color name. Then use this color name to create the corresponding BEM modifier.
     const color = hexToString(item.color);
-    cloneEl.querySelector(".card").classList.add(`card_color_${color}`); // The color modifier belongs on the inner .card <a> element
+    cloneEl.classList.add(`card_color_${color}`); // The color modifier belongs on the inner .card <a> element
 
     // P1P2-T3a.3-1 customizes it (for now, just add the card title)
     const titleEl = cloneEl.querySelector(".card__title"); // be descriptive, don't use cardEl.
     titleEl.textContent = item.name; // assign item.name to its textContent. similar to image with src & alt.
 
+    const flipBtnEl = cloneEl.querySelector(".card__flip-btn");
+    flipBtnEl.style.display = "none"; // hide the flip button for the card item in the home view, since we don't need to flip the card in this view. We only need to flip the card in the carousel view, where we can see the question and answer for each flashcard.
     // P1P2-T3b interactive delete button. When clicked, the card should be removed from the DOM.
     const deleteBtn = cloneEl.querySelector(".card__delete-btn");
     deleteBtn.addEventListener("click", () => {
@@ -72,10 +76,64 @@ function renderHomeView() {
   gallery.forEach(renderCardEl);
 }
 
+function renderDeckView(deck) {
+  activeDeck = deck;
+  homeSection.style.display = "none";
+  deckSection.style.display = "block";
+  carouselSection.style.display = "none";
+  notFoundSection.style.display = "none";
+  deckTitleEl.textContent = deck.name;
+  deckPracticeButtonEl.disabled = deck.gallery.length === 0;
+  deckCardListEl.replaceChildren();
+
+  deck.gallery.forEach((flashcard) => {
+    const flashcardEl = cardTemplateEl.content
+      .querySelector(".card")
+      .cloneNode(true);
+    const titleEl = flashcardEl.querySelector(".card__title");
+    const colorName = hexToString(deck.color);
+    let showingQuestion = true;
+
+    titleEl.textContent = flashcard.question;
+    if (colorName) {
+      flashcardEl.classList.add(`card_color_${colorName}`);
+    }
+
+    flashcardEl.querySelector(".card__flip-btn").addEventListener("click", () => {
+      showingQuestion = !showingQuestion;
+      titleEl.textContent = showingQuestion ? flashcard.question : flashcard.answer;
+      removeColorClasses(flashcardEl);
+      flashcardEl.classList.add(
+        showingQuestion ? `card_color_${colorName}` : "card_color_white",
+      );
+    });
+
+    flashcardEl.querySelector(".card__delete-btn").addEventListener("click", () => {
+      const flashcardIndex = deck.gallery.findIndex(
+        (item) => item.id === flashcard.id,
+      );
+      if (flashcardIndex !== -1) {
+        deck.gallery.splice(flashcardIndex, 1);
+      }
+      flashcardEl.remove();
+      deckPracticeButtonEl.disabled = deck.gallery.length === 0;
+    });
+
+    deckCardListEl.append(flashcardEl);
+  });
+}
+
+deckPracticeButtonEl.addEventListener("click", () => {
+  if (activeDeck && activeDeck.gallery.length > 0) {
+    window.location.hash = `carousel/${activeDeck.id}`;
+  }
+});
+
 // P1P2-T4.5 the hash routing instructions.
 // this runs router() on initial load.
 function renderNotFoundView() {
   homeSection.style.display = "none"; // none=hide other views. flex=use flex in CSS. block=this can't be used in .js if CSS uses flex.
+  deckSection.style.display = "none";
   carouselSection.style.display = "none"; // P1P2-T6.2 none=hide other views. flex=use flex in CSS. block=this can't be used in .js if CSS uses flex.
   notFoundSection.style.display = "flex";
 }
@@ -97,9 +155,19 @@ function router() {
     const card = getCardByID(cardID); // we can extract the card ID from the hash by splitting the hash string on the "/" character and taking the second part (index 1) of the resulting array, which will give us the ID of the card that we want to render in the carousel view. Then we can call the renderCarouselView function with that card object to render the carousel view for that specific card.
 
     homeSection.style.display = "none";
+    deckSection.style.display = "none";
     carouselSection.style.display = "flex"; // ← "flex", not "block"
     notFoundSection.style.display = "none";
     renderCarouselView(card); // render the carousel view for the specified card when the hash starts with "carousel/". We can extract the card ID from the hash by splitting the hash string on the "/" character and taking the second part (index 1) of the resulting array, which will give us the ID of the card that we want to render in the carousel view. Then we can call the renderCarouselView function with that card object to render the carousel view for that specific card.
+  } else if (hash.startsWith("deck/")) {
+    const deckID = hash.split("/")[1];
+    const deck = getCardByID(deckID);
+
+    if (deck) {
+      renderDeckView(deck);
+    } else {
+      renderNotFoundView();
+    }
   } else {
     // any unknown hash (including #about) should show the Not Found view
     renderNotFoundView();
